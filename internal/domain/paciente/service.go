@@ -51,6 +51,7 @@ func (s *service) GetAll(ctx context.Context) ([]Paciente, error) {
 // GetByID returns a paciente by its ID.
 func (s *service) GetByID(ctx context.Context, id int) (Paciente, error) {
 	paciente, err := s.repository.GetByID(ctx, id)
+	//paciente.Turnos, err := s.
 	if err != nil {
 		log.Println("log de error en service de paciente", err.Error())
 		return Paciente{}, errors.New("error en servicio. Metodo GetByID")
@@ -89,7 +90,6 @@ func requestToPaciente(requestPaciente RequestPaciente) Paciente {
 	paciente.FirstName = requestPaciente.FirstName
 	paciente.Domicilio = requestPaciente.Domicilio
 	paciente.Dni = requestPaciente.Dni
-	paciente.FechaAlta = requestPaciente.FechaAlta
 
 	return paciente
 }

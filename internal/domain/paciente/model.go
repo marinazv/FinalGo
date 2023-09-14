@@ -1,6 +1,8 @@
 package paciente
 
 import (
+	"time"
+
 	"github.com/marinazv/FinalGo/internal/domain/turno"
 )
 
@@ -11,7 +13,7 @@ type Paciente struct {
 	FirstName string        `json:"first_name"`
 	Domicilio string        `json:"domicilio"`
 	Dni       string        `json:"dni"`
-	FechaAlta string        `json:"fecha_alta"`
+	FechaAlta time.Time     `json:"fecha_alta"`
 	Turnos    []turno.Turno `json:"turnos"`
 }
 
@@ -21,5 +23,4 @@ type RequestPaciente struct {
 	FirstName string `json:"first_name"`
 	Domicilio string `json:"domicilio"`
 	Dni       string `json:"dni"`
-	FechaAlta string `json:"fecha_alta"`
 }

@@ -32,7 +32,6 @@ func (r *repository) Create(ctx context.Context, paciente Paciente) (Paciente, e
 		paciente.FirstName,
 		paciente.Domicilio,
 		paciente.Dni,
-		paciente.FechaAlta,
 	)
 
 	if err != nil {
@@ -68,7 +67,6 @@ func (r *repository) GetAll(ctx context.Context) ([]Paciente, error) {
 			&paciente.FirstName,
 			&paciente.Domicilio,
 			&paciente.Dni,
-			&paciente.FechaAlta,
 		)
 		if err != nil {
 			return []Paciente{}, err

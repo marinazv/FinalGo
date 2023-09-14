@@ -5,8 +5,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 	handlerodontologo "github.com/marinazv/FinalGo/cmd/server/handler/odontologo"
+	handlerPaciente "github.com/marinazv/FinalGo/cmd/server/handler/paciente"
 	"github.com/marinazv/FinalGo/cmd/server/handler/ping"
-	odontologo "github.com/marinazv/FinalGo/internal/domain/Odontologo"
+	odontologo "github.com/marinazv/FinalGo/internal/domain/odontologo"
+	paciente "github.com/marinazv/FinalGo/internal/domain/paciente"
 	"github.com/marinazv/FinalGo/pkg/middleware"
 )
 
@@ -34,6 +36,7 @@ func NewRouter(engine *gin.Engine, db *sql.DB) Router {
 func (r *router) MapRoutes() {
 	r.setGroup()
 	r.buildOdontologoRoutes()
+	r.buildPacienteRoutes()
 	r.buildPingRoutes()
 }
 
@@ -42,18 +45,33 @@ func (r *router) setGroup() {
 	r.routerGroup = r.engine.Group("/api/v1")
 }
 
-// buildProductRoutes maps all routes for the odontologos domain.
+// buildOdontologoRoutes maps all routes for the odontologos domain.
 func (r *router) buildOdontologoRoutes() {
 	// Create a new odontologo controller.
 	repository := odontologo.NewRepositoryMySql(r.db)
 	service := odontologo.NewService(repository)
 	controlador := handlerodontologo.NewControladorOdontologo(service)
 
-	r.routerGroup.POST("/odontologos", middleware.Authenticate(),controlador.Create())
-	r.routerGroup.GET("/odontologos",middleware.Authenticate(), controlador.GetAll())
-	r.routerGroup.GET("/odontologos/:id",middleware.Authenticate(), controlador.GetByID())
-	r.routerGroup.PUT("/odontologos/:id",middleware.Authenticate(), controlador.Update())
-	r.routerGroup.DELETE("/odontologos/:id",middleware.Authenticate(), controlador.Delete())
+	r.routerGroup.POST("/odontologos", middleware.Authenticate(), controlador.Create())
+	r.routerGroup.GET("/odontologos", middleware.Authenticate(), controlador.GetAll())
+	r.routerGroup.GET("/odontologos/:id", middleware.Authenticate(), controlador.GetByID())
+	r.routerGroup.PUT("/odontologos/:id", middleware.Authenticate(), controlador.Update())
+	r.routerGroup.DELETE("/odontologos/:id", middleware.Authenticate(), controlador.Delete())
+
+}
+
+// buildPacienteRoutes maps all routes for the pacientes domain.
+func (r *router) buildPacienteRoutes() {
+	// Create a new paciente controller.
+	repository := paciente.NewRepositoryMySql(r.db)
+	service := paciente.NewService(repository)
+	controlador := handlerPaciente.NewControladorPaciente(service)
+
+	r.routerGroup.POST("/pacientes", middleware.Authenticate(), controlador.Create())
+	r.routerGroup.GET("/pacientes", middleware.Authenticate(), controlador.GetAll())
+	r.routerGroup.GET("/pacientes/:id", middleware.Authenticate(), controlador.GetByID())
+	r.routerGroup.PUT("/pacientes/:id", middleware.Authenticate(), controlador.Update())
+	r.routerGroup.DELETE("/pacientes/:id", middleware.Authenticate(), controlador.Delete())
 
 }
 

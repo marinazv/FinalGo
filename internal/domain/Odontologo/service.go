@@ -41,7 +41,7 @@ func (s *service) Create(ctx context.Context, requestOdontologo RequestOdontolog
 func (s *service) GetAll(ctx context.Context) ([]Odontologo, error) {
 	odontologos, err := s.repository.GetAll(ctx)
 	if err != nil {
-		log.Println("log de error en service de producto", err.Error())
+		log.Println("log de error en service de odontologo", err.Error())
 		return []Odontologo{}, ErrEmptyList
 	}
 

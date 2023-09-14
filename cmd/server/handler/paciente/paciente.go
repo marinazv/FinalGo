@@ -1,38 +1,38 @@
-package odontologo
+package paciente
 
 import (
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	odontologo "github.com/marinazv/FinalGo/internal/domain/odontologo"
+	paciente "github.com/marinazv/FinalGo/internal/domain/paciente"
 	"github.com/marinazv/FinalGo/pkg/web"
 )
 
 type Controlador struct {
-	service odontologo.Service
+	service paciente.Service
 }
 
-func NewControladorOdontologo(service odontologo.Service) *Controlador {
+func NewControladorPaciente(service paciente.Service) *Controlador {
 	return &Controlador{
 		service: service,
 	}
 }
 
-// Odontologo godoc
-// @Summary odontologo example
-// @Description Create a new odontologo
-// @Tags odontologo
+// paciente godoc
+// @Summary paciente example
+// @Description Create a new paciente
+// @Tags paciente
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
-// @Router /odontologos [post]
+// @Router /pacientes [post]
 func (c *Controlador) Create() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
-		var request odontologo.RequestOdontologo
+		var request paciente.RequestPaciente
 
 		err := ctx.Bind(&request)
 
@@ -41,31 +41,31 @@ func (c *Controlador) Create() gin.HandlerFunc {
 			return
 		}
 
-		odontologo, err := c.service.Create(ctx, request)
+		paciente, err := c.service.Create(ctx, request)
 		if err != nil {
 			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
 			return
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"data": odontologo,
+			"data": paciente,
 		})
 
 	}
 }
 
-// Odontologo godoc
-// @Summary odontologo example
-// @Description Get all odontologos
-// @Tags odontologo
+// paciente godoc
+// @Summary paciente example
+// @Description Get all pacientes
+// @Tags paciente
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 500 {object} web.errorResponse
-// @Router /odontologos [get]
+// @Router /pacientes [get]
 func (c *Controlador) GetAll() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		odontologos, err := c.service.GetAll(ctx)
+		pacientes, err := c.service.GetAll(ctx)
 
 		if err != nil {
 			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
@@ -73,22 +73,22 @@ func (c *Controlador) GetAll() gin.HandlerFunc {
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"data": odontologos,
+			"data": pacientes,
 		})
 	}
 }
 
 // Oontologo godoc
-// @Summary odontologo example
-// @Description Get odontologo by id
-// @Tags odontologo
-// @Param id path int true "id del odontologo"
+// @Summary paciente example
+// @Description Get paciente by id
+// @Tags paciente
+// @Param id path int true "id del paciente"
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
-// @Router /odontologos/:id [get]
+// @Router /pacientes/:id [get]
 func (c *Controlador) GetByID() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))
@@ -97,32 +97,32 @@ func (c *Controlador) GetByID() gin.HandlerFunc {
 			return
 		}
 
-		odontologo, err := c.service.GetByID(ctx, id)
+		paciente, err := c.service.GetByID(ctx, id)
 		if err != nil {
 			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
 			return
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"data": odontologo,
+			"data": paciente,
 		})
 	}
 }
 
-// Odontologo godoc
-// @Summary odontologo example
-// @Description Update odontologo by id
-// @Tags odontologo
+// paciente godoc
+// @Summary paciente example
+// @Description Update paciente by id
+// @Tags paciente
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
-// @Router /odontologos/:id [put]
+// @Router /pacientes/:id [put]
 func (c *Controlador) Update() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
-		var request odontologo.RequestOdontologo
+		var request paciente.RequestPaciente
 
 		errBind := ctx.Bind(&request)
 
@@ -140,30 +140,30 @@ func (c *Controlador) Update() gin.HandlerFunc {
 			return
 		}
 
-		odontologo, err := c.service.Update(ctx, request, idInt)
+		paciente, err := c.service.Update(ctx, request, idInt)
 		if err != nil {
 			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
 			return
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"data": odontologo,
+			"data": paciente,
 		})
 
 	}
 }
 
 // Oontologo godoc
-// @Summary odontologo example
-// @Description Delete odontologo by id
-// @Tags odontologo
-// @Param id path int true "id del odontologo"
+// @Summary paciente example
+// @Description Delete paciente by id
+// @Tags paciente
+// @Param id path int true "id del paciente"
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
-// @Router /odontologos/:id [delete]
+// @Router /pacientes/:id [delete]
 func (c *Controlador) Delete() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))
@@ -179,7 +179,7 @@ func (c *Controlador) Delete() gin.HandlerFunc {
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"mensaje": "odontologo eliminado",
+			"mensaje": "paciente eliminado",
 		})
 	}
 }

@@ -1,19 +1,23 @@
 # FinalGo
 
-# Sistema de reserva de turnos
+###  Sistema de reserva de turnos
 Se desea implementar una API que permita administrar la reserva de turnos para una clínica
 odontológica. Esta debe cumplir con los siguientes requerimientos:
+
 ● Administración de datos de odontólogos: listar, agregar, modificar y eliminar
 odontólogos. Registrar apellido, nombre y matrícula de los mismos. Se desea el
 desarrollo de un CRUD para la entidad Dentista.
+
 ○ POST: agregar dentista.
 ○ GET: traer dentista por ID.
 ○ PUT: actualizar dentista.
 ○ PATCH: actualizar un dentista por alguno de sus campos.
 ○ DELETE: eliminar el dentista.
+
 ● Administración de datos de los pacientes: listar, agregar, modificar y eliminar
 pacientes. De cada uno se almacenan: nombre, apellido, domicilio, DNI y fecha de
 alta. Se desea el desarrollo de un CRUD para la entidad Paciente.
+
 ○ POST: agregar paciente.
 ○ GET: traer paciente por ID.
 ○ PUT: actualizar paciente.
@@ -25,6 +29,7 @@ alta. Se desea el desarrollo de un CRUD para la entidad Paciente.
 ● Registrar turno: se tiene que poder permitir asignar a un paciente un turno con un
 odontólogo a una determinada fecha y hora. Al turno se le debe poder agregar una
 descripción. Se desea el desarrollo de un CRUD para la entidad Turno.
+
 ○ POST: agregar turno.
 ○ GET: traer turno por ID.
 ○ PUT: actualizar turno.

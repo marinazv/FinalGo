@@ -12,6 +12,7 @@ import (
 	"github.com/marinazv/FinalGo/cmd/server/routes"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 const (

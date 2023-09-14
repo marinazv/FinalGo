@@ -7,12 +7,12 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
-	"github.com/marinazv/FinalGo/pkg/middleware"
 	"github.com/marinazv/FinalGo/cmd/server/routes"
+	"github.com/marinazv/FinalGo/pkg/middleware"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 const (

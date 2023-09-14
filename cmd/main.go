@@ -15,11 +15,6 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-const (
-	// puerto en el que se ejecutara el servidor.
-	puerto = ":9090"
-)
-
 // @title           Swagger Example API
 // @version         1.0
 // @description     This is a sample server celler server.
@@ -80,7 +75,7 @@ func runApp(db *sql.DB, engine *gin.Engine) {
 	router := routes.NewRouter(engine, db)
 	// Map all routes.
 	router.MapRoutes()
-	if err := engine.Run(puerto); err != nil {
+	if err := engine.Run(os.Getenv("Port_local")); err != nil {
 		panic(err)
 	}
 
@@ -90,7 +85,7 @@ func runApp(db *sql.DB, engine *gin.Engine) {
 func connectDB() *sql.DB {
 	var dbUsername, dbPassword, dbHost, dbPort, dbName string
 	dbUsername = "root"
-	dbPassword = ""
+	dbPassword = "Charito2020"
 	dbHost = "localhost"
 	dbPort = "3306"
 	dbName = "my_db"

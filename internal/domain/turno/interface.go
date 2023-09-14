@@ -1,4 +1,4 @@
-package odontologo
+package turno
 
 import (
 	"context"
@@ -8,16 +8,16 @@ import (
 // Errores
 var (
 	ErrEmptyList = errors.New("the list is empty")
-	ErrNotFound  = errors.New("odontologo not found")
+	ErrNotFound  = errors.New("turno not found")
 	ErrStatement = errors.New("error preparing statement")
 	ErrExec      = errors.New("error exect statement")
 	ErrLastId    = errors.New("error getting last id")
 )
 
 type Repository interface {
-	Create(ctx context.Context, odontologo Odontologo) (Odontologo, error)
-	GetAll(ctx context.Context) ([]Odontologo, error)
-	GetByID(ctx context.Context, id int) (Odontologo, error)
-	Update(ctx context.Context, odontologo Odontologo) (Odontologo, error)
+	Create(ctx context.Context, turno Turno) (Turno, error)
+	GetAll(ctx context.Context) ([]Turno, error)
+	GetByID(ctx context.Context, id int) (Turno, error)
+	Update(ctx context.Context, turno Turno) (Turno, error)
 	Delete(ctx context.Context, id int) error
 }

@@ -1,4 +1,5 @@
 package ping
+
 import (
 	"net/http"
 

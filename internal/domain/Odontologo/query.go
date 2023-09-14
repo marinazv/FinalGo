@@ -2,7 +2,7 @@ package odontologo
 
 var (
 	QueryInsertOdontologo = `INSERT INTO my_db.odontologos(name,first_name,matricula)
-	VALUES(?,?,?,?,?,?)`
+	VALUES(?,?,?)`
 	QueryGetAllOdontologos = `SELECT id, name, first_name, matricula 
 	FROM my_db.odontologos`
 	QueryDeleteOdontologo  = `DELETE FROM my_db.odontologos WHERE id = ?`

@@ -1,38 +1,38 @@
-package paciente
+package turno
 
 import (
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	paciente "github.com/marinazv/FinalGo/internal/domain/paciente"
+	turno "github.com/marinazv/FinalGo/internal/domain/turno"
 	"github.com/marinazv/FinalGo/pkg/web"
 )
 
 type Controlador struct {
-	service paciente.Service
+	service turno.Service
 }
 
-func NewControladorPaciente(service paciente.Service) *Controlador {
+func NewControladorTurno(service turno.Service) *Controlador {
 	return &Controlador{
 		service: service,
 	}
 }
 
-// paciente godoc
-// @Summary paciente example
-// @Description Create a new paciente
-// @Tags paciente
+// turno godoc
+// @Summary turno example
+// @Description Create a new turno
+// @Tags turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
-// @Router /pacientes [post]
+// @Router /turnos [post]
 func (c *Controlador) Create() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
-		var request paciente.RequestPaciente
+		var request turno.RequestTurno
 
 		err := ctx.Bind(&request)
 
@@ -41,31 +41,31 @@ func (c *Controlador) Create() gin.HandlerFunc {
 			return
 		}
 
-		paciente, err := c.service.Create(ctx, request)
+		turno, err := c.service.Create(ctx, request)
 		if err != nil {
 			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
 			return
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"data": paciente,
+			"data": turno,
 		})
 
 	}
 }
 
-// paciente godoc
-// @Summary paciente example
-// @Description Get all pacientes
-// @Tags paciente
+// turno godoc
+// @Summary turno example
+// @Description Get all turnos
+// @Tags turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 500 {object} web.errorResponse
-// @Router /pacientes [get]
+// @Router /turnos [get]
 func (c *Controlador) GetAll() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		pacientes, err := c.service.GetAll(ctx)
+		turnos, err := c.service.GetAll(ctx)
 
 		if err != nil {
 			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
@@ -73,22 +73,22 @@ func (c *Controlador) GetAll() gin.HandlerFunc {
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"data": pacientes,
+			"data": turnos,
 		})
 	}
 }
 
-// Paciente godoc
-// @Summary paciente example
-// @Description Get paciente by id
-// @Tags paciente
-// @Param id path int true "id del paciente"
+// Turno godoc
+// @Summary turno example
+// @Description Get turno by id
+// @Tags turno
+// @Param id path int true "id del turno"
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
-// @Router /pacientes/:id [get]
+// @Router /turnos/:id [get]
 func (c *Controlador) GetByID() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))
@@ -97,32 +97,32 @@ func (c *Controlador) GetByID() gin.HandlerFunc {
 			return
 		}
 
-		paciente, err := c.service.GetByID(ctx, id)
+		turno, err := c.service.GetByID(ctx, id)
 		if err != nil {
 			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
 			return
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"data": paciente,
+			"data": turno,
 		})
 	}
 }
 
-// paciente godoc
-// @Summary paciente example
-// @Description Update paciente by id
-// @Tags paciente
+// turno godoc
+// @Summary turno example
+// @Description Update turno by id
+// @Tags turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
-// @Router /pacientes/:id [put]
+// @Router /turnos/:id [put]
 func (c *Controlador) Update() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
-		var request paciente.RequestPaciente
+		var request turno.RequestTurno
 
 		errBind := ctx.Bind(&request)
 
@@ -140,30 +140,30 @@ func (c *Controlador) Update() gin.HandlerFunc {
 			return
 		}
 
-		paciente, err := c.service.Update(ctx, request, idInt)
+		turno, err := c.service.Update(ctx, request, idInt)
 		if err != nil {
 			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
 			return
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"data": paciente,
+			"data": turno,
 		})
 
 	}
 }
 
-// Paciente godoc
-// @Summary paciente example
-// @Description Delete paciente by id
-// @Tags paciente
-// @Param id path int true "id del paciente"
+// Turno godoc
+// @Summary turno example
+// @Description Delete turno by id
+// @Tags turno
+// @Param id path int true "id del turno"
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
-// @Router /pacientes/:id [delete]
+// @Router /turnos/:id [delete]
 func (c *Controlador) Delete() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))
@@ -179,7 +179,7 @@ func (c *Controlador) Delete() gin.HandlerFunc {
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"mensaje": "paciente eliminado",
+			"mensaje": "turno eliminado",
 		})
 	}
 }

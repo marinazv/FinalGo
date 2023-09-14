@@ -7,8 +7,10 @@ import (
 	handlerodontologo "github.com/marinazv/FinalGo/cmd/server/handler/odontologo"
 	handlerPaciente "github.com/marinazv/FinalGo/cmd/server/handler/paciente"
 	"github.com/marinazv/FinalGo/cmd/server/handler/ping"
+	handlerTurno "github.com/marinazv/FinalGo/cmd/server/handler/turno"
 	odontologo "github.com/marinazv/FinalGo/internal/domain/odontologo"
 	paciente "github.com/marinazv/FinalGo/internal/domain/paciente"
+	"github.com/marinazv/FinalGo/internal/domain/turno"
 	"github.com/marinazv/FinalGo/pkg/middleware"
 )
 
@@ -37,6 +39,7 @@ func (r *router) MapRoutes() {
 	r.setGroup()
 	r.buildOdontologoRoutes()
 	r.buildPacienteRoutes()
+	r.buildTurnoRoutes()
 	r.buildPingRoutes()
 }
 
@@ -72,6 +75,21 @@ func (r *router) buildPacienteRoutes() {
 	r.routerGroup.GET("/pacientes/:id", middleware.Authenticate(), controlador.GetByID())
 	r.routerGroup.PUT("/pacientes/:id", middleware.Authenticate(), controlador.Update())
 	r.routerGroup.DELETE("/pacientes/:id", middleware.Authenticate(), controlador.Delete())
+
+}
+
+// buildTurnoRoutes maps all routes for the turno domain.
+func (r *router) buildTurnoRoutes() {
+	// Create a new turno controller.
+	repository := turno.NewRepositoryMySql(r.db)
+	service := turno.NewService(repository)
+	controlador := handlerTurno.NewControladorTurno(service)
+
+	r.routerGroup.POST("/turnos", middleware.Authenticate(), controlador.Create())
+	r.routerGroup.GET("/turnos", middleware.Authenticate(), controlador.GetAll())
+	r.routerGroup.GET("/turnos/:id", middleware.Authenticate(), controlador.GetByID())
+	r.routerGroup.PUT("/turnos/:id", middleware.Authenticate(), controlador.Update())
+	r.routerGroup.DELETE("/turnos/:id", middleware.Authenticate(), controlador.Delete())
 
 }
 

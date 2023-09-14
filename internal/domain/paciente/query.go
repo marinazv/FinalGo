@@ -2,7 +2,7 @@ package paciente
 
 var (
 	QueryInsertPaciente = `INSERT INTO my_db.odontologos(name,first_name,domicilio, dni, fecha_alta)
-	VALUES(?,?,?,?,?,?)`
+	VALUES(?,?,?,?,?)`
 	QueryGetAllPacientes = `SELECT id, name, first_name, domicilio, dni, fecha_alta
 	FROM my_db.Pacientes`
 	QueryDeletePaciente  = `DELETE FROM my_db.Pacientes WHERE id = ?`

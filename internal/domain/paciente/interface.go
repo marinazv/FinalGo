@@ -8,7 +8,7 @@ import (
 // Errores
 var (
 	ErrEmptyList = errors.New("the list is empty")
-	ErrNotFound  = errors.New("product not found")
+	ErrNotFound  = errors.New("paciente not found")
 	ErrStatement = errors.New("error preparing statement")
 	ErrExec      = errors.New("error exect statement")
 	ErrLastId    = errors.New("error getting last id")

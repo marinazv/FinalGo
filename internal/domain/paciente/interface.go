@@ -20,4 +20,5 @@ type Repository interface {
 	GetByID(ctx context.Context, id int) (Paciente, error)
 	Update(ctx context.Context, paciente Paciente) (Paciente, error)
 	Delete(ctx context.Context, id int) error
+	Patch(ctx context.Context, id int, campos map[string]interface{}) (*Paciente, error)
 }

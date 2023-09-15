@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"log"
+	"time"
 )
 
 type service struct {
@@ -16,6 +17,7 @@ type Service interface {
 	GetByID(ctx context.Context, id int) (Paciente, error)
 	Update(ctx context.Context, requestPaciente RequestPaciente, id int) (Paciente, error)
 	Delete(ctx context.Context, id int) error
+	Patch(ctx context.Context, id int, campos map[string]interface{}) (*Paciente, error)
 }
 
 // NewService creates a new paciente service.
@@ -92,4 +94,43 @@ func requestToPaciente(requestPaciente RequestPaciente) Paciente {
 	paciente.Dni = requestPaciente.Dni
 
 	return paciente
+}
+
+// Patch actualiza parcialmente un paciente.
+func (s *service) Patch(ctx context.Context, id int, campos map[string]interface{}) (*Paciente, error) {
+	paciente, err := s.GetByID(ctx, id)
+	if err != nil {
+		log.Println("Error al obtener paciente en el servicio:", err.Error())
+		return nil, err
+	}
+
+	// Actualiza los campos del paciente con los valores proporcionados en el mapa "campos".
+	for campo, valor := range campos {
+		switch campo {
+		case "name":
+			paciente.Name = valor.(string)
+		case "FirstName":
+			paciente.FirstName = valor.(string)
+		case "Domicilio":
+			paciente.Domicilio = valor.(string)
+		case "Dni":
+			paciente.Dni = valor.(string)
+		case "FechaAlta":
+			fechaAltaStr := valor.(string)
+			fechaTime, err := time.Parse("2006-01-02 00:00:00", fechaAltaStr)
+			if err != nil {
+				log.Println("Fecha no tiene el formato adecuado")
+			}
+			paciente.FechaAlta = fechaTime
+		}
+	}
+
+	// Actualiza el paciente con los nuevos datos.
+	pacienteActualizado, err := s.repository.Patch(ctx, id, campos) // Pasamos id y campos
+	if err != nil {
+		log.Println("Error al actualizar paciente en el servicio:", err.Error())
+		return nil, err
+	}
+
+	return pacienteActualizado, nil
 }

@@ -183,3 +183,31 @@ func (c *Controlador) Delete() gin.HandlerFunc {
 		})
 	}
 }
+
+
+//Patch
+func (c *Controlador) Patch() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		id, err := strconv.Atoi(ctx.Param("id"))
+		if err != nil {
+			web.Error(ctx, http.StatusBadRequest, "%s", "ID de Paciente inválido")
+			return
+		}
+
+		var campos map[string]interface{}
+		if err := ctx.BindJSON(&campos); err != nil {
+			web.Error(ctx, http.StatusBadRequest, "%s", "Datos de actualización inválidos")
+			return
+		}
+
+		pacienteActualizado, err := c.service.Patch(ctx, id, campos)
+		if err != nil {
+			web.Error(ctx, http.StatusInternalServerError, "%s", "No se pudo actualizar el paciente")
+			return
+		}
+
+		web.Success(ctx, http.StatusOK, gin.H{
+			"data": pacienteActualizado,
+		})
+	}
+}

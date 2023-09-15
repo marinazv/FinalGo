@@ -60,6 +60,7 @@ func (r *router) buildOdontologoRoutes() {
 	r.routerGroup.GET("/odontologos/:id", middleware.Authenticate(), controlador.GetByID())
 	r.routerGroup.PUT("/odontologos/:id", middleware.Authenticate(), controlador.Update())
 	r.routerGroup.DELETE("/odontologos/:id", middleware.Authenticate(), controlador.Delete())
+	r.routerGroup.PATCH("/odontologos/:id", middleware.Authenticate(), controlador.Patch())
 
 }
 

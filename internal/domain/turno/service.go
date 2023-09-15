@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"log"
+	"time"
 )
 
 type service struct {
@@ -16,6 +17,7 @@ type Service interface {
 	GetByID(ctx context.Context, id int) (Turno, error)
 	Update(ctx context.Context, requestTurno RequestTurno, id int) (Turno, error)
 	Delete(ctx context.Context, id int) error
+	Patch(ctx context.Context, id int, campos map[string]interface{}) (*Turno, error)
 }
 
 // NewService creates a new turno service.
@@ -91,4 +93,41 @@ func requestToTurno(requestTurno RequestTurno) Turno {
 	turno.FechaHora = requestTurno.FechaHora
 
 	return turno
+}
+
+// Patch actualiza parcialmente un turno.
+func (s *service) Patch(ctx context.Context, id int, campos map[string]interface{}) (*Turno, error) {
+	turno, err := s.GetByID(ctx, id)
+	if err != nil {
+		log.Println("Error al obtener turno en el servicio:", err.Error())
+		return nil, err
+	}
+
+	// Actualiza los campos del turno con los valores proporcionados en el mapa "campos".
+	for campo, valor := range campos {
+		switch campo {
+		case "id_paciente":
+			turno.IdPaciente = valor.(int)
+		case "id_odontologo":
+			turno.IdOdontologo = valor.(int)
+		case "descripcion":
+			turno.Descripcion = valor.(string)
+		case "fecha_hora":
+			fechaAltaStr := valor.(string)
+			fechaTime, err := time.Parse("2006-01-02 00:00:00", fechaAltaStr)
+			if err != nil {
+				log.Println("Fecha no tiene el formato adecuado")
+			}
+			turno.FechaHora = fechaTime
+		}
+	}
+
+	// Actualiza el turno con los nuevos datos.
+	turnoActualizado, err := s.repository.Patch(ctx, id, campos) // Pasamos id y campos
+	if err != nil {
+		log.Println("Error al actualizar turno en el servicio:", err.Error())
+		return nil, err
+	}
+
+	return turnoActualizado, nil
 }

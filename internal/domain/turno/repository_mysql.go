@@ -3,6 +3,8 @@ package turno
 import (
 	"context"
 	"database/sql"
+	"log"
+	"time"
 )
 
 type repository struct {
@@ -153,4 +155,42 @@ func (r *repository) Delete(ctx context.Context, id int) error {
 
 	return nil
 
+}
+
+// Patch
+// Patch actualiza parcialmente un turno en la base de datos.
+func (r *repository) Patch(ctx context.Context, id int, campos map[string]interface{}) (*Turno, error) {
+	// Obtén el turno por su ID utilizando el método GetByID
+	turno, err := r.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	// Actualiza los campos del turno con los valores proporcionados en el mapa "campos"
+	for campo, valor := range campos {
+		switch campo {
+		case "id_paciente":
+			turno.IdPaciente = valor.(int)
+		case "id_odontologo":
+			turno.IdOdontologo = valor.(int)
+		case "descripcion":
+			turno.Descripcion = valor.(string)
+		case "fecha_hora":
+			fechaAltaStr := valor.(string)
+			fechaTime, err := time.Parse("2006-01-02 00:00:00", fechaAltaStr)
+			if err != nil {
+				log.Println("Fecha no tiene el formato adecuado")
+			}
+			turno.FechaHora = fechaTime
+		}
+	}
+
+	// Actualiza el turno en la base de datos
+	_, err = r.db.ExecContext(ctx, QueryUpdateTurno, turno.IdPaciente, turno.IdOdontologo, turno.Descripcion, turno.FechaHora, turno.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	// Retorna el turno actualizado
+	return &turno, nil
 }

@@ -92,6 +92,7 @@ func (r *router) buildTurnoRoutes() {
 	r.routerGroup.GET("/turnos/:id", middleware.Authenticate(), controlador.GetByID())
 	r.routerGroup.PUT("/turnos/:id", middleware.Authenticate(), controlador.Update())
 	r.routerGroup.DELETE("/turnos/:id", middleware.Authenticate(), controlador.Delete())
+	r.routerGroup.PATCH("/turnos/:id", middleware.Authenticate(), controlador.Patch())
 
 }
 

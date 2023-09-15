@@ -85,8 +85,8 @@ func (s *service) Delete(ctx context.Context, id int) error {
 
 func requestToOdontologo(requestOdontologo RequestOdontologo) Odontologo {
 	var odontologo Odontologo
-	odontologo.Name = requestOdontologo.Name
 	odontologo.FirstName = requestOdontologo.FirstName
+	odontologo.LastName = requestOdontologo.LastName
 	odontologo.Matricula = requestOdontologo.Matricula
 
 	return odontologo

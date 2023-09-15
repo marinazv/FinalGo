@@ -20,4 +20,5 @@ type Repository interface {
 	GetByID(ctx context.Context, id int) (Odontologo, error)
 	Update(ctx context.Context, odontologo Odontologo) (Odontologo, error)
 	Delete(ctx context.Context, id int) error
+	Patch(ctx context.Context, id int, campos map[string]interface{}) (*Odontologo, error)
 }

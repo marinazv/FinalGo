@@ -150,3 +150,34 @@ func (r *repository) Delete(ctx context.Context, id int) error {
 	return nil
 
 }
+
+//Patch
+// Patch actualiza parcialmente un odontólogo en la base de datos.
+func (r *repository) Patch(ctx context.Context, id int, campos map[string]interface{}) (*Odontologo, error) {
+	// Obtén el odontólogo por su ID utilizando el método GetByID
+	odontologo, err := r.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	// Actualiza los campos del odontólogo con los valores proporcionados en el mapa "campos"
+	for campo, valor := range campos {
+		switch campo {
+		case "name":
+			odontologo.Name = valor.(string)
+		case "first_name":
+			odontologo.FirstName = valor.(string)
+		case "matricula":
+			odontologo.Matricula = valor.(string)
+		}
+	}
+
+	// Actualiza el odontólogo en la base de datos
+	_, err = r.db.ExecContext(ctx, QueryUpdateOdontologo, odontologo.Name, odontologo.FirstName, odontologo.Matricula, odontologo.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	// Retorna el odontólogo actualizado
+	return &odontologo, nil
+}

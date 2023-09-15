@@ -28,8 +28,8 @@ func (r *repository) Create(ctx context.Context, odontologo Odontologo) (Odontol
 	defer statement.Close()
 
 	result, err := statement.Exec(
+		odontologo.Name,
 		odontologo.FirstName,
-		odontologo.LastName,
 		odontologo.Matricula,
 	)
 
@@ -62,8 +62,8 @@ func (r *repository) GetAll(ctx context.Context) ([]Odontologo, error) {
 		var odontologo Odontologo
 		err := rows.Scan(
 			&odontologo.ID,
+			&odontologo.Name,
 			&odontologo.FirstName,
-			&odontologo.LastName,
 			&odontologo.Matricula,
 		)
 		if err != nil {
@@ -87,8 +87,8 @@ func (r *repository) GetByID(ctx context.Context, id int) (Odontologo, error) {
 	var odontologo Odontologo
 	err := row.Scan(
 		&odontologo.ID,
+		&odontologo.Name,
 		&odontologo.FirstName,
-		&odontologo.LastName,
 		&odontologo.Matricula,
 	)
 
@@ -109,8 +109,8 @@ func (r *repository) Update(ctx context.Context, odontologo Odontologo) (Odontol
 	defer statement.Close()
 
 	result, err := statement.Exec(
+		odontologo.Name,
 		odontologo.FirstName,
-		odontologo.LastName,
 		odontologo.Matricula,
 		odontologo.ID,
 	)

@@ -16,6 +16,7 @@ type Service interface {
 	GetByID(ctx context.Context, id int) (Odontologo, error)
 	Update(ctx context.Context, requestOdontologo RequestOdontologo, id int) (Odontologo, error)
 	Delete(ctx context.Context, id int) error
+	Patch(ctx context.Context, id int, campos map[string]interface{}) (*Odontologo, error)
 }
 
 // NewService creates a new odontologo service.
@@ -90,4 +91,35 @@ func requestToOdontologo(requestOdontologo RequestOdontologo) Odontologo {
 	odontologo.Matricula = requestOdontologo.Matricula
 
 	return odontologo
+}
+
+
+// Patch actualiza parcialmente un odontólogo.
+func (s *service) Patch(ctx context.Context, id int, campos map[string]interface{}) (*Odontologo, error) {
+	odontologo, err := s.GetByID(ctx, id)
+	if err != nil {
+		log.Println("Error al obtener odontólogo en el servicio:", err.Error())
+		return nil, err
+	}
+
+	// Actualiza los campos del odontólogo con los valores proporcionados en el mapa "campos".
+	for campo, valor := range campos {
+		switch campo {
+		case "name":
+			odontologo.Name = valor.(string)
+		case "FirstName":
+			odontologo.FirstName = valor.(string)
+		case "Matricula":
+			odontologo.Matricula = valor.(string)
+		}
+	}
+
+	// Actualiza el odontólogo con los nuevos datos.
+	odontologoActualizado, err := s.repository.Patch(ctx, id, campos) // Pasamos id y campos
+	if err != nil {
+		log.Println("Error al actualizar odontólogo en el servicio:", err.Error())
+		return nil, err
+	}
+
+	return odontologoActualizado, nil
 }

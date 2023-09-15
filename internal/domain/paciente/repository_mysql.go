@@ -67,6 +67,7 @@ func (r *repository) GetAll(ctx context.Context) ([]Paciente, error) {
 			&paciente.FirstName,
 			&paciente.Domicilio,
 			&paciente.Dni,
+			&paciente.FechaAlta,
 		)
 		if err != nil {
 			return []Paciente{}, err

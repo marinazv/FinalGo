@@ -16,3 +16,5 @@ type RequestTurno struct {
 	Descripcion  string `json:"descripcion"`
 	FechaHora    string `json:"fecha_hora"`
 }
+
+

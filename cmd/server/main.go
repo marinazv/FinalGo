@@ -88,7 +88,7 @@ func connectDB() *sql.DB {
 	dbUsername = os.Getenv("DB_USERNAME")
 	dbPassword = os.Getenv("DB_PASSWORD")
 	dbHost = os.Getenv("DB_HOST")
-	dbPort = os.Getenv("DB_DBPORT")
+	dbPort = os.Getenv("DB_PORT")
 	dbName = os.Getenv("DB_NAME")
 
 	// Create the data source.

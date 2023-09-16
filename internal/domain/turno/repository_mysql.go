@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"log"
-	"time"
 )
 
 type repository struct {
@@ -177,11 +176,10 @@ func (r *repository) Patch(ctx context.Context, id int, campos map[string]interf
 			turno.Descripcion = valor.(string)
 		case "fecha_hora":
 			fechaAltaStr := valor.(string)
-			fechaTime, err := time.Parse("2006-01-02 00:00:00", fechaAltaStr)
 			if err != nil {
 				log.Println("Fecha no tiene el formato adecuado")
 			}
-			turno.FechaHora = fechaTime
+			turno.FechaHora = fechaAltaStr
 		}
 	}
 

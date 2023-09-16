@@ -8,7 +8,8 @@ import (
 	handlerPaciente "github.com/marinazv/FinalGo/cmd/server/handler/paciente"
 	"github.com/marinazv/FinalGo/cmd/server/handler/ping"
 	handlerTurno "github.com/marinazv/FinalGo/cmd/server/handler/turno"
-	odontologo "github.com/marinazv/FinalGo/internal/domain/odontologo"
+
+	"github.com/marinazv/FinalGo/internal/domain/odontologo"
 	paciente "github.com/marinazv/FinalGo/internal/domain/paciente"
 	"github.com/marinazv/FinalGo/internal/domain/turno"
 	"github.com/marinazv/FinalGo/pkg/middleware"

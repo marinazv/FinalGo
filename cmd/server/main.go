@@ -45,14 +45,14 @@ func main() {
 		}
 	}()
 
-	// Connect to the database.
-	db := connectDB()
-
 	// Load the environment variables.
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Connect to the database.
+	db := connectDB()
 
 	// Create a new Gin engine.
 	engine := gin.New()
@@ -76,7 +76,7 @@ func runApp(db *sql.DB, engine *gin.Engine) {
 	router := routes.NewRouter(engine, db)
 	// Map all routes.
 	router.MapRoutes()
-	if err := engine.Run(os.Getenv("Port_local")); err != nil {
+	if err := engine.Run(os.Getenv("LOCAL_PORT")); err != nil {
 		panic(err)
 	}
 
@@ -85,14 +85,16 @@ func runApp(db *sql.DB, engine *gin.Engine) {
 // connectDB connects to the database.
 func connectDB() *sql.DB {
 	var dbUsername, dbPassword, dbHost, dbPort, dbName string
-	dbUsername = "root"
-	dbPassword = "Charito2020"
-	dbHost = "localhost"
-	dbPort = "3306"
-	dbName = "my_db"
+	dbUsername = os.Getenv("DB_USERNAME")
+	dbPassword = os.Getenv("DB_PASSWORD")
+	dbHost = os.Getenv("DB_HOST")
+	dbPort = os.Getenv("DB_DBPORT")
+	dbName = os.Getenv("DB_NAME")
 
 	// Create the data source.
 	dataSource := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUsername, dbPassword, dbHost, dbPort, dbName)
+
+	fmt.Print(dataSource)
 
 	// Open the connection.
 	db, err := sql.Open("mysql", dataSource)

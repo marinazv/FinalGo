@@ -10,4 +10,4 @@ services:
       MYSQL_PASSWORD: Charito2020
       MYSQL_ROOT_PASSWORD: Charito2020
     ports:
-      - 3309:3306
+      - 3306:3306

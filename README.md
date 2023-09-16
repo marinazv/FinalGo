@@ -54,3 +54,6 @@ Podrás utilizar cualquier base de datos relacional modelado a través de un mod
 entidad-relación, como H2 o MySQL, o no relacional, como MongoDB.
 ● Capa/dominio service.
 ● Capa/dominio handler.
+
+#para levantar el proyecto
+- 

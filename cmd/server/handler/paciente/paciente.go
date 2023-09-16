@@ -19,10 +19,10 @@ func NewControladorPaciente(service paciente.Service) *Controlador {
 	}
 }
 
-// paciente godoc
-// @Summary paciente example
+// Create godoc
+// @Summary Create paciente
 // @Description Create a new paciente
-// @Tags paciente
+// @Tags domain.paciente
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -54,10 +54,10 @@ func (c *Controlador) Create() gin.HandlerFunc {
 	}
 }
 
-// paciente godoc
-// @Summary paciente example
-// @Description Get all pacientes
-// @Tags paciente
+// GetAll godoc
+// @Summary Get all pacientes
+// @Description Get all the pacientes
+// @Tags domain.paciente
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -78,10 +78,10 @@ func (c *Controlador) GetAll() gin.HandlerFunc {
 	}
 }
 
-// Paciente godoc
-// @Summary paciente example
-// @Description Get paciente by id
-// @Tags paciente
+// GetByID godoc
+// @Summary Get paciente
+// @Description Get a paciente by ID
+// @Tags domain.paciente
 // @Param id path int true "id del paciente"
 // @Accept json
 // @Produce json
@@ -109,10 +109,10 @@ func (c *Controlador) GetByID() gin.HandlerFunc {
 	}
 }
 
-// paciente godoc
-// @Summary paciente example
-// @Description Update paciente by id
-// @Tags paciente
+// Update godoc
+// @Summary Update paciente
+// @Description Update paciente by ID
+// @Tags domain.paciente
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -153,10 +153,10 @@ func (c *Controlador) Update() gin.HandlerFunc {
 	}
 }
 
-// Paciente godoc
-// @Summary paciente example
-// @Description Delete paciente by id
-// @Tags paciente
+// Delete godoc
+// @Summary Delete paciente
+// @Description Delete paciente by ID
+// @Tags domain.paciente
 // @Param id path int true "id del paciente"
 // @Accept json
 // @Produce json
@@ -184,8 +184,17 @@ func (c *Controlador) Delete() gin.HandlerFunc {
 	}
 }
 
-
-//Patch
+// Patch godoc
+// @Summary Patch paciente
+// @Description Modify the values of the paciente fields
+// @Tags domain.paciente
+// @Param id path int true "id del paciente"
+// @Accept json
+// @Produce json
+// @Success 200 {object} web.response
+// @Failure 400 {object} web.errorResponse
+// @Failure 500 {object} web.errorResponse
+// @Router /pacientes/:id [patch]
 func (c *Controlador) Patch() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))

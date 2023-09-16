@@ -19,10 +19,10 @@ func NewControladorTurno(service turno.Service) *Controlador {
 	}
 }
 
-// turno godoc
-// @Summary turno example
+// Create godoc
+// @Summary Create turno
 // @Description Create a new turno
-// @Tags turno
+// @Tags domain.turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -54,10 +54,10 @@ func (c *Controlador) Create() gin.HandlerFunc {
 	}
 }
 
-// turno godoc
-// @Summary turno example
-// @Description Get all turnos
-// @Tags turno
+// GetAll godoc
+// @Summary Get all turnos
+// @Description Get all the turnos
+// @Tags domain.turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -78,10 +78,10 @@ func (c *Controlador) GetAll() gin.HandlerFunc {
 	}
 }
 
-// Turno godoc
-// @Summary turno example
-// @Description Get turno by id
-// @Tags turno
+// GetByID godoc
+// @Summary Get turno by ID
+// @Description Get a turno by ID
+// @Tags domain.turno
 // @Param id path int true "id del turno"
 // @Accept json
 // @Produce json
@@ -109,10 +109,10 @@ func (c *Controlador) GetByID() gin.HandlerFunc {
 	}
 }
 
-// turno godoc
-// @Summary turno example
-// @Description Update turno by id
-// @Tags turno
+// Update godoc
+// @Summary Update turno
+// @Description Update turno by ID
+// @Tags domain.turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -153,10 +153,10 @@ func (c *Controlador) Update() gin.HandlerFunc {
 	}
 }
 
-// Turno godoc
-// @Summary turno example
-// @Description Delete turno by id
-// @Tags turno
+// Delete godoc
+// @Summary Delete turno
+// @Description Delete turno by ID
+// @Tags domain.turno
 // @Param id path int true "id del turno"
 // @Accept json
 // @Produce json

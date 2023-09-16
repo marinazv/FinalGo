@@ -3,6 +3,8 @@ package paciente
 import (
 	"context"
 	"database/sql"
+	"time"
+	"log"
 )
 
 type repository struct {
@@ -156,4 +158,45 @@ func (r *repository) Delete(ctx context.Context, id int) error {
 
 	return nil
 
+}
+
+
+//Patch
+// Patch actualiza parcialmente un paciente en la base de datos.
+func (r *repository) Patch(ctx context.Context, id int, campos map[string]interface{}) (*Paciente, error) {
+	// Obtén el paciente por su ID utilizando el método GetByID
+	paciente, err := r.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	// Actualiza los campos del paciente con los valores proporcionados en el mapa "campos"
+	for campo, valor := range campos {
+		switch campo {
+		case "name":
+			paciente.Name = valor.(string)
+		case "first_name":
+			paciente.FirstName = valor.(string)
+		case "domicilio":
+			paciente.Domicilio = valor.(string)
+		case "dni":
+			paciente.Dni = valor.(string)
+		case "fechaAlta":
+			fechaAltaStr := valor.(string)
+			fechaTime, err := time.Parse("2006-01-02 00:00:00", fechaAltaStr)
+			if err != nil {
+				log.Println("Fecha no tiene el formato adecuado")
+			}
+			paciente.FechaAlta = fechaTime
+		}
+	}
+
+	// Actualiza el paciente en la base de datos
+	_, err = r.db.ExecContext(ctx, QueryUpdatePaciente, paciente.Name, paciente.FirstName, paciente.Domicilio, paciente.Dni, paciente.FechaAlta, paciente.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	// Retorna el paciente actualizado
+	return &paciente, nil
 }

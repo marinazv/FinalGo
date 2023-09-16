@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	odontologo "github.com/marinazv/FinalGo/internal/domain/odontologo"
+	"github.com/marinazv/FinalGo/internal/domain/odontologo"
 	"github.com/marinazv/FinalGo/pkg/web"
 )
 
@@ -185,7 +185,7 @@ func (c *Controlador) Delete() gin.HandlerFunc {
 	}
 }
 
-//Patch
+// Patch
 func (c *Controlador) Patch() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))
@@ -211,4 +211,3 @@ func (c *Controlador) Patch() gin.HandlerFunc {
 		})
 	}
 }
-

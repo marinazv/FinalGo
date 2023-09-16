@@ -109,27 +109,27 @@ func connectDB() *sql.DB {
 	}
 
 	// Leer el contenido del archivo
-    sqlBytes, err := os.ReadFile("schema.txt")
-    if err != nil {
-        log.Fatal(err)
-    }
+	sqlBytes, err := os.ReadFile("schema.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    // Convertir el contenido a una cadena
-    sqlString := string(sqlBytes)
+	// Convertir el contenido a una cadena
+	sqlString := string(sqlBytes)
 
-    // Divide el contenido en sentencias SQL individuales
-    sqlStatements := strings.Split(sqlString, ";")
+	// Divide el contenido en sentencias SQL individuales
+	sqlStatements := strings.Split(sqlString, ";")
 
-    // Ejecutar cada sentencia SQL en la base de datos
-    for _, statement := range sqlStatements {
-        statement = strings.TrimSpace(statement)
-        if statement == "" {
-            continue
-        }
+	// Ejecutar cada sentencia SQL en la base de datos
+	for _, statement := range sqlStatements {
+		statement = strings.TrimSpace(statement)
+		if statement == "" {
+			continue
+		}
 
-        if _, err := db.Exec(statement); err != nil {
-            log.Printf("Error al ejecutar sentencia SQL: %v", err)
-        }
-    }
+		if _, err := db.Exec(statement); err != nil {
+			log.Printf("Error al ejecutar sentencia SQL: %v", err)
+		}
+	}
 	return db
 }

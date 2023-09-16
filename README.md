@@ -1,5 +1,14 @@
 # FinalGo
 
+# Para levantar el proyecto
+Warning: la base de datos se levanta en el puerto 3306, verificar si esta libre! En caso de estar ocupado cambiar puerto en el archivo docker-compose y main antes de levantar el proyecto.
+Si no podria tener localmente una base de datos creada con el nombre: my_db y ejecutar el proyecto sin necesidad de levantar el contenedor.
+Adicionalmente el proyecto se encarga de crear la estructura de cargas y setear los registros iniciales.
+
+- docker-compose up
+
+- go run cmd/main.go
+
 ###  Sistema de reserva de turnos
 Se desea implementar una API que permita administrar la reserva de turnos para una clínica
 odontológica. Esta debe cumplir con los siguientes requerimientos:
@@ -55,5 +64,3 @@ entidad-relación, como H2 o MySQL, o no relacional, como MongoDB.
 ● Capa/dominio service.
 ● Capa/dominio handler.
 
-#para levantar el proyecto
-- 

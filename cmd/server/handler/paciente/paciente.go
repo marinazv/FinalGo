@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
+	// "time"
+
 	"github.com/gin-gonic/gin"
 	paciente "github.com/marinazv/FinalGo/internal/domain/paciente"
 	"github.com/marinazv/FinalGo/pkg/web"
@@ -122,7 +124,7 @@ func (c *Controlador) GetByID() gin.HandlerFunc {
 func (c *Controlador) Update() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
-		var request paciente.RequestPaciente
+		var request paciente.Paciente
 
 		errBind := ctx.Bind(&request)
 
@@ -130,6 +132,8 @@ func (c *Controlador) Update() gin.HandlerFunc {
 			web.Error(ctx, http.StatusBadRequest, "%s", "bad request binding")
 			return
 		}
+
+
 
 		id := ctx.Param("id")
 
@@ -184,8 +188,7 @@ func (c *Controlador) Delete() gin.HandlerFunc {
 	}
 }
 
-
-//Patch
+// Patch
 func (c *Controlador) Patch() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))

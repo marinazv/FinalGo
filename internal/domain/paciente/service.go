@@ -15,7 +15,7 @@ type Service interface {
 	Create(ctx context.Context, requestPaciente RequestPaciente) (Paciente, error)
 	GetAll(ctx context.Context) ([]Paciente, error)
 	GetByID(ctx context.Context, id int) (Paciente, error)
-	Update(ctx context.Context, requestPaciente RequestPaciente, id int) (Paciente, error)
+	Update(ctx context.Context, request Paciente, id int) (Paciente, error)
 	Delete(ctx context.Context, id int) error
 	Patch(ctx context.Context, id int, campos map[string]interface{}) (*Paciente, error)
 }
@@ -63,16 +63,39 @@ func (s *service) GetByID(ctx context.Context, id int) (Paciente, error) {
 }
 
 // Update updates a paciente.
-func (s *service) Update(ctx context.Context, requestPaciente RequestPaciente, id int) (Paciente, error) {
-	paciente := requestToPaciente(requestPaciente)
-	paciente.ID = id
-	response, err := s.repository.Update(ctx, paciente)
+func (s *service) Update(ctx context.Context, request Paciente, id int) (Paciente, error) {
+	// Primero, verifica si el paciente existe.
+	pacienteExistente, err := s.repository.GetByID(ctx, id)
+	if err != nil {
+			return Paciente{}, err
+	}
+
+	// Actualiza los campos del paciente con los valores proporcionados en la solicitud.
+	if request.Name != "" {
+			pacienteExistente.Name = request.Name
+	}
+	if request.FirstName != "" {
+			pacienteExistente.FirstName = request.FirstName
+	}
+	if request.Domicilio != "" {
+			pacienteExistente.Domicilio = request.Domicilio
+	}
+	if request.Dni != "" {
+			pacienteExistente.Dni = request.Dni
+	}
+	if !request.FechaAlta.IsZero() {
+		pacienteExistente.FechaAlta = request.FechaAlta
+	}
+
+
+	// Llama al método de repositorio para actualizar el paciente en la base de datos.
+	pacienteActualizado, err := s.repository.Update(ctx, pacienteExistente)
 	if err != nil {
 		log.Println("log de error en service de paciente", err.Error())
 		return Paciente{}, errors.New("error en servicio. Metodo Update")
 	}
 
-	return response, nil
+	return pacienteActualizado, nil
 }
 
 // Delete deletes a paciente.

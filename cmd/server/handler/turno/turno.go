@@ -78,6 +78,34 @@ func (c *Controlador) GetAll() gin.HandlerFunc {
 	}
 }
 
+
+// Turno godoc
+// @Summary turno example
+// @Description Get turno by pacienteDni
+// @Tags turno
+// @Param dni path string "dni del paciente"
+// @Accept json
+// @Produce json
+// @Success 200 {object} web.response
+// @Failure 400 {object} web.errorResponse
+// @Failure 500 {object} web.errorResponse
+// @Router /turnosPaciente/dni [get]
+func (c *Controlador) GetByDniPaciente() gin.HandlerFunc{
+	return func(ctx *gin.Context){
+		dni := ctx.Query("dni")
+		turno, err := c.service.GetByDniPaciente(ctx, dni)
+
+		if err != nil {
+			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
+			return
+		}
+
+		web.Success(ctx, http.StatusOK, gin.H{
+			"data": turno,
+		})
+	}
+}
+
 // Turno godoc
 // @Summary turno example
 // @Description Get turno by id
@@ -108,6 +136,7 @@ func (c *Controlador) GetByID() gin.HandlerFunc {
 		})
 	}
 }
+
 
 // turno godoc
 // @Summary turno example

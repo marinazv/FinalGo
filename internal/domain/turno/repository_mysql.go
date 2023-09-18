@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"log"
-	"time"
 )
 
 type repository struct {
@@ -104,6 +103,44 @@ func (r *repository) GetByID(ctx context.Context, id int) (Turno, error) {
 	return turno, nil
 }
 
+// Trae turno por dni de paciente que indicamos por query
+func (r *repository) GetByDniPaciente(ctx context.Context, dni string) ([]RequestTurnoByDni, error) {
+	row, err := r.db.Query(QueryGetTurnosByDniPaciente, dni)
+	if err != nil {
+		return []RequestTurnoByDni{}, err
+	}
+	defer row.Close()
+
+	var turnos []RequestTurnoByDni
+	for row.Next(){
+		var turno RequestTurnoByDni
+		err := row.Scan(
+		&turno.Descripcion,
+		&turno.FechaHora,
+		&turno.Dni,
+		&turno.NamePaciente,
+		&turno.FirstNamePaciente,
+		&turno.NameOdontologo,
+		&turno.FirstNameOdontologo,
+	)
+
+	if err != nil {
+		return []RequestTurnoByDni{}, err
+	}
+
+	turnos = append(turnos, turno)
+
+}
+
+if err := row.Err(); err != nil {
+	return []RequestTurnoByDni{}, err
+}
+
+return turnos, nil
+
+
+}
+
 // Update updates a turno.
 func (r *repository) Update(ctx context.Context, turno Turno) (Turno, error) {
 	statement, err := r.db.Prepare(QueryUpdateTurno)
@@ -177,11 +214,10 @@ func (r *repository) Patch(ctx context.Context, id int, campos map[string]interf
 			turno.Descripcion = valor.(string)
 		case "fecha_hora":
 			fechaAltaStr := valor.(string)
-			fechaTime, err := time.Parse("2006-01-02 00:00:00", fechaAltaStr)
 			if err != nil {
 				log.Println("Fecha no tiene el formato adecuado")
 			}
-			turno.FechaHora = fechaTime
+			turno.FechaHora = fechaAltaStr
 		}
 	}
 

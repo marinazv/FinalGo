@@ -4,8 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"log"
-
-	"github.com/marinazv/FinalGo/cmd/server/handler/turno"
 )
 
 type repository struct {
@@ -51,33 +49,22 @@ func (r *repository) Create(ctx context.Context, turno Turno) (Turno, error) {
 	return turno, nil
 }
 
-//CreateByDniAndMatricula creates a new turno 
+//CreateByDniAndMatricula creates a new turno
 
-func (r *repository) CreateByDniAndMatricula(ctx context.Context, request RequestTurnoDniAndMatricula)(any, error){
-	statement, err := r.db.Prepare(QueryGetTurnosByDniPaciente)
+func (r *repository) CreateByDniAndMatricula(ctx context.Context, request RequestTurnoDniAndMatricula) (any, error) {
+	turno, err := r.db.Query(QueryGetTurnosByDniPaciente, request.Dni,request.Matricula,request.Descripcion,request.FechaHora)
 	if err != err {
 		return Turno{}, err
 	}
 
-	defer statement.Close()
-
-	result, err := statement.Exec(
-		request.Dni,
-		request.Matricula,
-		request.Descripcion,
-		request.FechaHora,
-	)
+	defer turno.Close()
 
 	if err != nil {
 		return Turno{}, ErrExec
 	}
 
-
-	return result, nil
-
-
+	return turno, nil
 }
-
 
 // GetAll returns all turnos.
 func (r *repository) GetAll(ctx context.Context) ([]Turno, error) {
@@ -144,32 +131,31 @@ func (r *repository) GetByDniPaciente(ctx context.Context, dni string) ([]Reques
 	defer row.Close()
 
 	var turnos []RequestTurnoByDni
-	for row.Next(){
+	for row.Next() {
 		var turno RequestTurnoByDni
 		err := row.Scan(
-		&turno.Descripcion,
-		&turno.FechaHora,
-		&turno.Dni,
-		&turno.NamePaciente,
-		&turno.FirstNamePaciente,
-		&turno.NameOdontologo,
-		&turno.FirstNameOdontologo,
-	)
+			&turno.Descripcion,
+			&turno.FechaHora,
+			&turno.Dni,
+			&turno.NamePaciente,
+			&turno.FirstNamePaciente,
+			&turno.NameOdontologo,
+			&turno.FirstNameOdontologo,
+		)
 
-	if err != nil {
+		if err != nil {
+			return []RequestTurnoByDni{}, err
+		}
+
+		turnos = append(turnos, turno)
+
+	}
+
+	if err := row.Err(); err != nil {
 		return []RequestTurnoByDni{}, err
 	}
 
-	turnos = append(turnos, turno)
-
-}
-
-if err := row.Err(); err != nil {
-	return []RequestTurnoByDni{}, err
-}
-
-return turnos, nil
-
+	return turnos, nil
 
 }
 

@@ -84,7 +84,7 @@ func (c *Controlador)CreateTurno() gin.HandlerFunc{
 		}
 
 		web.Success(ctx, http.StatusOK, gin.H{
-			"data": turno,
+			"message": turno,
 		})
 
 	}

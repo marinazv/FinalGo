@@ -42,14 +42,14 @@ func (s *service) Create(ctx context.Context, requestTurno RequestTurno) (Turno,
 
 //Crea turno con dni paciente y matricula de odontologo
 func (s *service)CreateByDniAndMatricula(ctx context.Context, request RequestTurnoDniAndMatricula)(any, error){
-	turno, err := s.repository.CreateByDniAndMatricula(ctx, request)
+	_, err := s.repository.CreateByDniAndMatricula(ctx, request)
 
 	if err != nil {
 		log.Println("error en servicio. Metodo create dni y matricula")
 		return Turno{}, errors.New("error en servicio. Metodo create dni y matricula")
 	}
 
-	return turno, nil
+	return "succes", nil
 }
 
 // GetAll returns all Turnos.

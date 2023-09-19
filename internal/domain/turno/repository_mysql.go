@@ -110,6 +110,8 @@ func (r *repository) GetByID(ctx context.Context, id int) (Turno, error) {
 
 // Trae turno por dni de paciente que indicamos por query
 func (r *repository) GetByDniPaciente(ctx context.Context, dni string) ([]RequestTurnoByDni, error) {
+	//queryPaciente := fmt.Sprintf("SELECT id FROM patients WHERE dni = '%s';", dni)
+
 	row, err := r.db.Query(QueryGetTurnosByDniPaciente, dni)
 	if err != nil {
 		return []RequestTurnoByDni{}, err

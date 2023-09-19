@@ -14,7 +14,7 @@ type Service interface {
 	Create(ctx context.Context, requestTurno RequestTurno) (Turno, error)
 	GetAll(ctx context.Context) ([]Turno, error)
 	GetByID(ctx context.Context, id int) (Turno, error)
-	GetByDniPaciente(ctx context.Context, dni string )([]RequestTurnoByDni, error)
+	GetByDniPaciente(ctx context.Context, dni string) ([]RequestTurnoByDni, error)
 	Update(ctx context.Context, requestTurno RequestTurno, id int) (Turno, error)
 	Delete(ctx context.Context, id int) error
 	Patch(ctx context.Context, id int, campos map[string]interface{}) (*Turno, error)
@@ -61,17 +61,15 @@ func (s *service) GetByID(ctx context.Context, id int) (Turno, error) {
 	return turno, nil
 }
 
-//GetByDniPaciente returns a Turno for the Paciente dni that we send as a parameter
-func (s *service) GetByDniPaciente(ctx context.Context, dni string)([]RequestTurnoByDni, error){
+// GetByDniPaciente returns a Turno for the Paciente dni that we send as a parameter
+func (s *service) GetByDniPaciente(ctx context.Context, dni string) ([]RequestTurnoByDni, error) {
 	turno, err := s.repository.GetByDniPaciente(ctx, dni)
-	if err != nil{
+	if err != nil {
 		log.Println("log de error en service de turno GetByDniPaciente", err.Error())
 		return []RequestTurnoByDni{}, errors.New("error en servicio. Metodo GetByDniPaciente")
 	}
 	return turno, nil
 }
-
-
 
 // Update updates a Turno.
 func (s *service) Update(ctx context.Context, requestTurno RequestTurno, id int) (Turno, error) {

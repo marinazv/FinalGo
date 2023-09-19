@@ -13,4 +13,5 @@ var (
 	QueryUpdateTurno = `UPDATE my_db.turnos SET id_paciente = ?,id_odontologo = ? ,descripcion = ?,fecha_hora = ?
 	WHERE id = ?`
 	QueryGetTurnosByDniPaciente = `SELECT descripcion, fecha_hora, my_db.Pacientes.dni, my_db.Pacientes.name, my_db.Pacientes.first_name, my_db.Odontologos.name, my_db.Odontologos.first_name FROM my_db.Turnos JOIN my_db.Odontologos ON my_db.Turnos.id_odontologo = my_db.Odontologos.id JOIN my_db.Pacientes ON my_db.Turnos.id_paciente = my_db.Pacientes.id WHERE my_db.Pacientes.dni = ?`
+	QueryInsertTurnoByDniAndMatricula = `SELECT id INTO @idPaciente FROM pacientes WHERE dni = ?; SELECT id INTO @idOdontologo FROM odontologos WHERE matricula = ?; INSERT INTO turnos (id_paciente id_odontologo, fecha_hora, descripcion) VALUES (@idPaciente, @idOdontologo, ?, ?);`
 )

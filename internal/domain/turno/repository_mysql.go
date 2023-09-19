@@ -49,6 +49,11 @@ func (r *repository) Create(ctx context.Context, turno Turno) (Turno, error) {
 	return turno, nil
 }
 
+//CreateByDniAndMatricula creates a new turno 
+
+//func (r *repository) CreateByDniAndMatricula(ctx context.Context, dni string, matricula string)(Turno, error )
+
+
 // GetAll returns all turnos.
 func (r *repository) GetAll(ctx context.Context) ([]Turno, error) {
 	rows, err := r.db.Query(QueryGetAllTurnos)

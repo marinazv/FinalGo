@@ -194,6 +194,7 @@ func (c *Controlador) Delete() gin.HandlerFunc {
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
 // @Router /odontologos/:id [patch]
+// Patch
 func (c *Controlador) Patch() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))

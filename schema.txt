@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS odontologos (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL,first_name VARCHAR(255) NOT NULL, matricula VARCHAR(255));
 
-INSERT INTO odontologos (id, name, first_name, matricula)
+INSERT IGNORE INTO odontologos (id, name, first_name, matricula)
 SELECT 1, "Marina", "zurita", "MP 12.345" UNION
 SELECT 2, "Juan", "MArtinez", "MP 22.456" UNION
 SELECT 3, "Marta", "Gonzalez", "MP 21.756"
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS pacientes (
     fecha_alta TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO pacientes (id, name, first_name, domicilio, dni, fecha_alta)
+INSERT IGNORE INTO pacientes (id, name, first_name, domicilio, dni, fecha_alta)
 SELECT 1, "Carlos", "Saez", "calle 56 nro 456", "43788456", Now() UNION
 SELECT 2, "Juliana", "Algo", "calle 8 nro 321", "43799956", Now() UNION
 SELECT 3, "Mariana", "Spacce", "calle 45 nro 111", "20799956", Now()
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS turnos (
     descripcion VARCHAR(255)
 );
 
-INSERT INTO turnos (id, id_odontologo, id_paciente, descripcion, fecha_hora)
+INSERT IGNORE INTO turnos (id, id_odontologo, id_paciente, descripcion, fecha_hora)
 SELECT 1, 2, 3, "primer consulta", "2023-09-15 10:30:00" UNION
 SELECT 2, 2, 2, "extraccion caries", "2023-09-18 11:30:00" UNION
 SELECT 3, 2, 2, "limpieza", "2023-09-30 12:30:00"

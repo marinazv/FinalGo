@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"log"
-	"time"
 )
 
 type service struct {
@@ -114,11 +113,10 @@ func (s *service) Patch(ctx context.Context, id int, campos map[string]interface
 			turno.Descripcion = valor.(string)
 		case "fecha_hora":
 			fechaAltaStr := valor.(string)
-			fechaTime, err := time.Parse("2006-01-02 00:00:00", fechaAltaStr)
 			if err != nil {
 				log.Println("Fecha no tiene el formato adecuado")
 			}
-			turno.FechaHora = fechaTime
+			turno.FechaHora = fechaAltaStr
 		}
 	}
 

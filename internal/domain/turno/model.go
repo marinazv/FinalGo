@@ -1,5 +1,6 @@
 package turno
 
+
 // Turno describes a turno.
 type Turno struct {
 	ID           int    `json:"id"`

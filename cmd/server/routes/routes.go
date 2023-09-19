@@ -89,6 +89,7 @@ func (r *router) buildTurnoRoutes() {
 	controlador := handlerTurno.NewControladorTurno(service)
 
 	r.routerGroup.POST("/turnos", middleware.Authenticate(), controlador.Create())
+	r.routerGroup.POST("/turnosByDni", middleware.Authenticate(), controlador.CreateTurno())
 	r.routerGroup.GET("/turnos", middleware.Authenticate(), controlador.GetAll())
 	r.routerGroup.GET("/turnos/:id", middleware.Authenticate(), controlador.GetByID())
 	r.routerGroup.GET("/turnosPaciente/", middleware.Authenticate(),controlador.GetByDniPaciente())

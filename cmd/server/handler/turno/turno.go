@@ -54,6 +54,42 @@ func (c *Controlador) Create() gin.HandlerFunc {
 	}
 }
 
+
+// turno godoc
+// @Summary turno example
+// @Description Create a new turno by Dni and Matricula
+// @Tags turno
+// @Accept json
+// @Produce json
+// @Success 200 {object} web.response
+// @Failure 400 {object} web.errorResponse
+// @Failure 500 {object} web.errorResponse
+// @Router /turnosByDni [post]
+func (c *Controlador)CreateTurno() gin.HandlerFunc{
+	return func(ctx *gin.Context) {
+
+		var request turno.RequestTurnoDniAndMatricula
+
+		err := ctx.Bind(&request)
+
+		if err != nil {
+			web.Error(ctx, http.StatusBadRequest, "%s", "bad request")
+			return
+		}
+
+		turno, err := c.service.CreateByDniAndMatricula(ctx, request)
+		if err != nil {
+			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
+			return
+		}
+
+		web.Success(ctx, http.StatusOK, gin.H{
+			"data": turno,
+		})
+
+	}
+}
+
 // turno godoc
 // @Summary turno example
 // @Description Get all turnos

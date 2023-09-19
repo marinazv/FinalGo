@@ -15,6 +15,7 @@ type Service interface {
 	GetAll(ctx context.Context) ([]Turno, error)
 	GetByID(ctx context.Context, id int) (Turno, error)
 	GetByDniPaciente(ctx context.Context, dni string) ([]RequestTurnoByDni, error)
+	CreateByDniAndMatricula(ctx context.Context, request RequestTurnoDniAndMatricula)(any, error)
 	Update(ctx context.Context, requestTurno RequestTurno, id int) (Turno, error)
 	Delete(ctx context.Context, id int) error
 	Patch(ctx context.Context, id int, campos map[string]interface{}) (*Turno, error)
@@ -37,6 +38,18 @@ func (s *service) Create(ctx context.Context, requestTurno RequestTurno) (Turno,
 	}
 
 	return response, nil
+}
+
+//Crea turno con dni paciente y matricula de odontologo
+func (s *service)CreateByDniAndMatricula(ctx context.Context, request RequestTurnoDniAndMatricula)(any, error){
+	turno, err := s.repository.CreateByDniAndMatricula(ctx, request)
+
+	if err != nil {
+		log.Println("error en servicio. Metodo create dni y matricula")
+		return Turno{}, errors.New("error en servicio. Metodo create dni y matricula")
+	}
+
+	return turno, nil
 }
 
 // GetAll returns all Turnos.

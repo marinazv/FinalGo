@@ -4,6 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"log"
+
+	"github.com/marinazv/FinalGo/cmd/server/handler/turno"
 )
 
 type repository struct {
@@ -51,7 +53,30 @@ func (r *repository) Create(ctx context.Context, turno Turno) (Turno, error) {
 
 //CreateByDniAndMatricula creates a new turno 
 
-//func (r *repository) CreateByDniAndMatricula(ctx context.Context, dni string, matricula string)(Turno, error )
+func (r *repository) CreateByDniAndMatricula(ctx context.Context, request RequestTurnoDniAndMatricula)(any, error){
+	statement, err := r.db.Prepare(QueryGetTurnosByDniPaciente)
+	if err != err {
+		return Turno{}, err
+	}
+
+	defer statement.Close()
+
+	result, err := statement.Exec(
+		request.Dni,
+		request.Matricula,
+		request.Descripcion,
+		request.FechaHora,
+	)
+
+	if err != nil {
+		return Turno{}, ErrExec
+	}
+
+
+	return result, nil
+
+
+}
 
 
 // GetAll returns all turnos.

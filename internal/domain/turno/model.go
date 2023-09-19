@@ -27,3 +27,10 @@ type RequestTurnoByDni struct {
 	NameOdontologo      string `json:"name_odontologo"`
 	FirstNameOdontologo string `json:"firstname_odontologo"`
 }
+
+type RequestTurnoDniAndMatricula struct {
+	Dni         string `json:"dni"`
+	Matricula   string `json:"matricula"`
+	Descripcion string `json:"descripcion"`
+	FechaHora   string `json:"fecha_hora"`
+}

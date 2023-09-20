@@ -13,11 +13,11 @@ func NewControladorPing() *Controlador {
 	return &Controlador{}
 }
 
-// PingExample godoc
-// @Summary ping example
+// Ping godoc
+// @Summary ping
 // @Schemes
 // @Description do ping
-// @Tags example
+// @Tags ping
 // @Accept json
 // @Produce json
 // @Success 200 {string} pong

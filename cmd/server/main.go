@@ -11,14 +11,15 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 	"github.com/marinazv/FinalGo/cmd/server/routes"
+	_ "github.com/marinazv/FinalGo/docs"
 	"github.com/marinazv/FinalGo/pkg/middleware"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @title           Swagger Example API
+// @title           Examen Final Backend III
 // @version         1.0
-// @description     This is a sample server celler server.
+// @description     Desafío Final: Sistema de reserva de turnos
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   API Support

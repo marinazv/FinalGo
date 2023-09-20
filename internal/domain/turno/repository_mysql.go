@@ -49,6 +49,23 @@ func (r *repository) Create(ctx context.Context, turno Turno) (Turno, error) {
 	return turno, nil
 }
 
+//CreateByDniAndMatricula creates a new turno
+
+func (r *repository) CreateByDniAndMatricula(ctx context.Context, request RequestTurnoDniAndMatricula) (any, error) {
+	turno, err := r.db.Query(QueryPostTurnosByDniPaciente, request.Dni,request.Matricula,request.Descripcion,request.FechaHora)
+	if err != err {
+		return Turno{}, err
+	}
+
+	defer turno.Close()
+
+	if err != nil {
+		return Turno{}, ErrExec
+	}
+
+	return turno, nil
+}
+
 // GetAll returns all turnos.
 func (r *repository) GetAll(ctx context.Context) ([]Turno, error) {
 	rows, err := r.db.Query(QueryGetAllTurnos)
@@ -101,6 +118,36 @@ func (r *repository) GetByID(ctx context.Context, id int) (Turno, error) {
 	}
 
 	return turno, nil
+}
+
+// Trae turno por dni de paciente que indicamos por query
+func (r *repository) GetByDniPaciente(ctx context.Context, dni string) ([]RequestTurnoByDni, error) {
+	row, err := r.db.Query(QueryGetTurnosByDniPaciente, dni)
+	if err != nil {
+		return []RequestTurnoByDni{}, err
+	}
+	defer row.Close()
+	var turnos []RequestTurnoByDni
+	for row.Next() {
+		var turno RequestTurnoByDni
+		err := row.Scan(
+			&turno.Descripcion,
+			&turno.FechaHora,
+			&turno.Dni,
+			&turno.NamePaciente,
+			&turno.FirstNamePaciente,
+			&turno.NameOdontologo,
+			&turno.FirstNameOdontologo,
+		)
+		if err != nil {
+			return []RequestTurnoByDni{}, err
+		}
+		turnos = append(turnos, turno)
+	}
+	if err := row.Err(); err != nil {
+		return []RequestTurnoByDni{}, err
+	}
+	return turnos, nil
 }
 
 // Update updates a turno.

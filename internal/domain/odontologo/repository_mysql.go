@@ -133,6 +133,19 @@ func (r *repository) Update(ctx context.Context, odontologo Odontologo) (Odontol
 
 // Delete deletes a odontologo.
 func (r *repository) Delete(ctx context.Context, id int) error {
+	result1, err := r.db.Exec(QueryDeleteTurno, id)
+	if err != nil {
+		return err
+	}
+
+	rowsAffected1, err := result1.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	if rowsAffected1 < 1 {
+		return ErrNotFound
+	}
 	result, err := r.db.Exec(QueryDeleteOdontologo, id)
 	if err != nil {
 		return err

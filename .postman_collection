@@ -1,0 +1,686 @@
+{
+	"info": {
+		"_postman_id": "2fd3feea-6584-42f7-86df-ec78bf8e7eac",
+		"name": "BackGo clinica odontologica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18572676",
+		"_collection_link": "https://crimson-crescent-402782.postman.co/workspace/My-Workspace~1574c507-e110-4a09-874c-e9922d8c8207/collection/18572676-2fd3feea-6584-42f7-86df-ec78bf8e7eac?action=share&source=collection_link&creator=18572676"
+	},
+	"item": [
+		{
+			"name": "getall odontologos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/odontologos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"odontologos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get odontologos ById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/odontologos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"odontologos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getall pacientes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get pacientes BYID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/pacientes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"pacientes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getall turnos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/turnos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"turnos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get turnoById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/turnos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"turnos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear odontologo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Marina\",\r\n    \"first_name\" : \"zurita verzini\",\r\n    \"matricula\": \"MP 14.666\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/odontologos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"odontologos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear paciente",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"marinaaaa\",\r\n    \"first_name\" : \"gomez\",\r\n    \"dni\" : \"1234657\",\r\n    \"domicilio\": \"calle sarasa 345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear turno",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_odontologo\": 1,\r\n    \"id_paciente\" : 1,\r\n    \"descripcion\" : \"turno control\",\r\n    \"fecha_hora\": \"2023-09-28 15:30:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/turnos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"turnos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH TURNO",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"fecha_hora\": \"2023-09-26 09:45:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/turnos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"turnos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH ocontologo",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Marinaaaa\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/odontologos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"odontologos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT turnoID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_paciente\": 2,\r\n    \"id_odontologo\": 2,\r\n    \"descripcion\": \"turno test\",\r\n    \"fecha_hora\": \"2024-09-28 11:30:10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/turnos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"turnos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT pacienteID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Carolina\",\r\n    \"first_name\": \"Saez\",\r\n    \"domicilio\": \"calle 57 nro 659\",\r\n    \"dni\": \"43788116\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/pacientes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"pacientes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT odontologoID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"mariii\",\r\n  \"first_name\": \"zuriiiiitt\",\r\n  \"matricula\": \"MP 23.456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/odontologos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"odontologos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL pacienteID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/pacientes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"pacientes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL turnoID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/turnos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"turnos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL odontologoID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/odontologos/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"odontologos",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH pacioentes",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"domicilio\": \"calle 53 nro 456\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/pacientes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"pacientes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get ByDNIPaciente",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/turnosPaciente/?dni=43799956",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"turnosPaciente",
+						""
+					],
+					"query": [
+						{
+							"key": "dni",
+							"value": "43799956"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST turnos DNI &MAtricula",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "tokenPostman",
+						"value": "jfdhy123"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dni\": \"43788499\",\n    \"matricula\" : \"MP 7.345\",\n    \"descripcion\" : \"test turno creado desde el dni del paciente\",\n    \"fecha_hora\": \"2023-10-15 15:30:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/turnosByDni",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"turnosByDni"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

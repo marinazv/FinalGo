@@ -12,13 +12,13 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/marinazv/FinalGo/cmd/server/routes"
 	"github.com/marinazv/FinalGo/pkg/middleware"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	swaggerFiles "github.com/swaggo/files"     // swagger embed files
+	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
 )
 
-// @title           Swagger Example API
+// @title           Examen Final Backend III
 // @version         1.0
-// @description     This is a sample server celler server.
+// @description     Desafío Final: Sistema de reserva de turnos
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   API Support

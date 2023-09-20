@@ -19,10 +19,10 @@ func NewControladorTurno(service turno.Service) *Controlador {
 	}
 }
 
-// turno godoc
-// @Summary turno example
+// Create godoc
+// @Summary Create turno
 // @Description Create a new turno
-// @Tags turno
+// @Tags domain.turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -54,17 +54,17 @@ func (c *Controlador) Create() gin.HandlerFunc {
 	}
 }
 
-// turno godoc
-// @Summary turno example
-// @Description Create a new turno by Dni and Matricula
-// @Tags turno
+// Create godoc
+// @Summary Create turno
+// @Description Create a new turno with DNI and Matricula
+// @Tags domain.turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
-// @Router /turnosByDni [post]
-func (c *Controlador)CreateTurno() gin.HandlerFunc{
+// @Router /turnos [post]
+func (c *Controlador) CreateTurno() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
 		var request turno.RequestTurnoDniAndMatricula
@@ -89,10 +89,10 @@ func (c *Controlador)CreateTurno() gin.HandlerFunc{
 	}
 }
 
-// turno godoc
-// @Summary turno example
-// @Description Get all turnos
-// @Tags turno
+// GetAll godoc
+// @Summary Get all turnos
+// @Description Get all the turnos
+// @Tags domain.turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -113,10 +113,10 @@ func (c *Controlador) GetAll() gin.HandlerFunc {
 	}
 }
 
-// Turno godoc
-// @Summary turno example
-// @Description Get turno by id
-// @Tags turno
+// GetByID godoc
+// @Summary Get turno by ID
+// @Description Get a turno by ID
+// @Tags domain.turno
 // @Param id path int true "id del turno"
 // @Accept json
 // @Produce json
@@ -144,19 +144,19 @@ func (c *Controlador) GetByID() gin.HandlerFunc {
 	}
 }
 
-// Turno godoc
-// @Summary turno example
+// GetByDNI godoc
+// @Summary Get turno by DNI
 // @Description Get turno by pacienteDni
-// @Tags turno
-// @Param dni path string "dni del paciente"
+// @Tags domain.turno
+// @Param dni path int true "dni del paciente"
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
 // @Failure 400 {object} web.errorResponse
 // @Failure 500 {object} web.errorResponse
 // @Router /turnosPaciente/dni [get]
-func (c *Controlador) GetByDniPaciente() gin.HandlerFunc{
-	return func(ctx *gin.Context){
+func (c *Controlador) GetByDniPaciente() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
 		dni := ctx.Query("dni")
 		turno, err := c.service.GetByDniPaciente(ctx, dni)
 
@@ -171,10 +171,10 @@ func (c *Controlador) GetByDniPaciente() gin.HandlerFunc{
 	}
 }
 
-// turno godoc
-// @Summary turno example
-// @Description Update turno by id
-// @Tags turno
+// Update godoc
+// @Summary Update turno
+// @Description Update turno by ID
+// @Tags domain.turno
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -215,10 +215,10 @@ func (c *Controlador) Update() gin.HandlerFunc {
 	}
 }
 
-// Turno godoc
-// @Summary turno example
-// @Description Delete turno by id
-// @Tags turno
+// Delete godoc
+// @Summary Delete turno
+// @Description Delete turno by ID
+// @Tags domain.turno
 // @Param id path int true "id del turno"
 // @Accept json
 // @Produce json
@@ -246,9 +246,17 @@ func (c *Controlador) Delete() gin.HandlerFunc {
 	}
 }
 
-
-
-//Patch
+// Patch godoc
+// @Summary Patch turno
+// @Description Modify the values of the turno fields
+// @Tags domain.turno
+// @Param id path int true "id del turno"
+// @Accept json
+// @Produce json
+// @Success 200 {object} web.response
+// @Failure 400 {object} web.errorResponse
+// @Failure 500 {object} web.errorResponse
+// @Router /turnos/:id [patch]
 func (c *Controlador) Patch() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))

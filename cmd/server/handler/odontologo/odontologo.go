@@ -20,10 +20,10 @@ func NewControladorOdontologo(service odontologo.Service) *Controlador {
 	}
 }
 
-// Odontologo godoc
-// @Summary odontologo example
+// Create godoc
+// @Summary Create odontologo
 // @Description Create a new odontologo
-// @Tags odontologo
+// @Tags domain.odontologo
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -55,10 +55,10 @@ func (c *Controlador) Create() gin.HandlerFunc {
 	}
 }
 
-// Odontologo godoc
-// @Summary odontologo example
-// @Description Get all odontologos
-// @Tags odontologo
+// GetAll godoc
+// @Summary Get all odontologos
+// @Description Get all the odontologos
+// @Tags domain.odontologo
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -79,10 +79,10 @@ func (c *Controlador) GetAll() gin.HandlerFunc {
 	}
 }
 
-// Oontologo godoc
-// @Summary odontologo example
-// @Description Get odontologo by id
-// @Tags odontologo
+// GetByID godoc
+// @Summary Get odontologo
+// @Description Get an odontologo by ID
+// @Tags domain.odontologo
 // @Param id path int true "id del odontologo"
 // @Accept json
 // @Produce json
@@ -110,10 +110,10 @@ func (c *Controlador) GetByID() gin.HandlerFunc {
 	}
 }
 
-// Odontologo godoc
-// @Summary odontologo example
-// @Description Update odontologo by id
-// @Tags odontologo
+// Update godoc
+// @Summary Update odontologo
+// @Description Update an odontologo by ID
+// @Tags domain.odontologo
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -154,11 +154,10 @@ func (c *Controlador) Update() gin.HandlerFunc {
 	}
 }
 
-// Oontologo godoc
-// @Summary odontologo example
-// @Description Delete odontologo by id
-// @Tags odontologo
-// @Param id path int true "id del odontologo"
+// Delete godoc
+// @Summary Delete odontologo
+// @Description Delete an odontologo by ID
+// @Tags domain.odontologo
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.response
@@ -185,7 +184,17 @@ func (c *Controlador) Delete() gin.HandlerFunc {
 	}
 }
 
-// Patch
+// Patch godoc
+// @Summary Patch odontologo
+// @Description Modify the values of the odontologo fields
+// @Tags domain.odontologo
+// @Param id path int true "id del odontologo"
+// @Accept json
+// @Produce json
+// @Success 200 {object} web.response
+// @Failure 400 {object} web.errorResponse
+// @Failure 500 {object} web.errorResponse
+// @Router /odontologos/:id [patch]
 func (c *Controlador) Patch() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.Atoi(ctx.Param("id"))

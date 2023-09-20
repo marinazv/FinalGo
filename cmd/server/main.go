@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
+	_ "github.com/marinazv/FinalGo/cmd/server/docs"
 	"github.com/marinazv/FinalGo/cmd/server/routes"
 	"github.com/marinazv/FinalGo/pkg/middleware"
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files

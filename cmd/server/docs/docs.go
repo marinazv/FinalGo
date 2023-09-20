@@ -240,7 +240,7 @@ const docTemplate = `{
         },
         "/pacientes": {
             "get": {
-                "description": "Get all pacientes",
+                "description": "Get all the pacientes",
                 "consumes": [
                     "application/json"
                 ],
@@ -248,9 +248,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "paciente"
+                    "domain.paciente"
                 ],
-                "summary": "paciente example",
+                "summary": "Get all pacientes",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -275,9 +275,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "paciente"
+                    "domain.paciente"
                 ],
-                "summary": "paciente example",
+                "summary": "Create paciente",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -302,7 +302,7 @@ const docTemplate = `{
         },
         "/pacientes/:id": {
             "get": {
-                "description": "Get paciente by id",
+                "description": "Get a paciente by ID",
                 "consumes": [
                     "application/json"
                 ],
@@ -310,9 +310,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "paciente"
+                    "domain.paciente"
                 ],
-                "summary": "paciente example",
+                "summary": "Get paciente",
                 "parameters": [
                     {
                         "type": "integer",
@@ -344,7 +344,7 @@ const docTemplate = `{
                 }
             },
             "put": {
-                "description": "Update paciente by id",
+                "description": "Update paciente by ID",
                 "consumes": [
                     "application/json"
                 ],
@@ -352,9 +352,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "paciente"
+                    "domain.paciente"
                 ],
-                "summary": "paciente example",
+                "summary": "Update paciente",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -377,7 +377,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Delete paciente by id",
+                "description": "Delete paciente by ID",
                 "consumes": [
                     "application/json"
                 ],
@@ -385,9 +385,51 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "paciente"
+                    "domain.paciente"
                 ],
-                "summary": "paciente example",
+                "summary": "Delete paciente",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id del paciente",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/web.response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/web.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/web.errorResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Modify the values of the paciente fields",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "domain.paciente"
+                ],
+                "summary": "Patch paciente",
                 "parameters": [
                     {
                         "type": "integer",
@@ -444,7 +486,7 @@ const docTemplate = `{
         },
         "/turnos": {
             "get": {
-                "description": "Get all turnos",
+                "description": "Get all the turnos",
                 "consumes": [
                     "application/json"
                 ],
@@ -452,9 +494,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "turno"
+                    "domain.turno"
                 ],
-                "summary": "turno example",
+                "summary": "Get all turnos",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -479,9 +521,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "turno"
+                    "domain.turno"
                 ],
-                "summary": "turno example",
+                "summary": "Create turno",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -506,7 +548,7 @@ const docTemplate = `{
         },
         "/turnos/:id": {
             "get": {
-                "description": "Get turno by id",
+                "description": "Get a turno by ID",
                 "consumes": [
                     "application/json"
                 ],
@@ -514,9 +556,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "turno"
+                    "domain.turno"
                 ],
-                "summary": "turno example",
+                "summary": "Get turno by ID",
                 "parameters": [
                     {
                         "type": "integer",
@@ -548,7 +590,7 @@ const docTemplate = `{
                 }
             },
             "put": {
-                "description": "Update turno by id",
+                "description": "Update turno by ID",
                 "consumes": [
                     "application/json"
                 ],
@@ -556,9 +598,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "turno"
+                    "domain.turno"
                 ],
-                "summary": "turno example",
+                "summary": "Update turno",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -581,7 +623,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Delete turno by id",
+                "description": "Delete turno by ID",
                 "consumes": [
                     "application/json"
                 ],
@@ -589,9 +631,51 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "turno"
+                    "domain.turno"
                 ],
-                "summary": "turno example",
+                "summary": "Delete turno",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id del turno",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/web.response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/web.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/web.errorResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Modify the values of the turno fields",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "domain.turno"
+                ],
+                "summary": "Patch turno",
                 "parameters": [
                     {
                         "type": "integer",
@@ -664,8 +748,6 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "Desafío Final: Sistema de reserva de turnos",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
 }
 
 func init() {

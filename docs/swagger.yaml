@@ -174,7 +174,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: Get all pacientes
+      description: Get all the pacientes
       produces:
       - application/json
       responses:
@@ -186,9 +186,9 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: paciente example
+      summary: Get all pacientes
       tags:
-      - paciente
+      - domain.paciente
     post:
       consumes:
       - application/json
@@ -208,14 +208,14 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: paciente example
+      summary: Create paciente
       tags:
-      - paciente
+      - domain.paciente
   /pacientes/:id:
     delete:
       consumes:
       - application/json
-      description: Delete paciente by id
+      description: Delete paciente by ID
       parameters:
       - description: id del paciente
         in: path
@@ -237,13 +237,13 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: paciente example
+      summary: Delete paciente
       tags:
-      - paciente
+      - domain.paciente
     get:
       consumes:
       - application/json
-      description: Get paciente by id
+      description: Get a paciente by ID
       parameters:
       - description: id del paciente
         in: path
@@ -265,13 +265,19 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: paciente example
+      summary: Get paciente
       tags:
-      - paciente
-    put:
+      - domain.paciente
+    patch:
       consumes:
       - application/json
-      description: Update paciente by id
+      description: Modify the values of the paciente fields
+      parameters:
+      - description: id del paciente
+        in: path
+        name: id
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -287,9 +293,31 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: paciente example
+      summary: Patch paciente
       tags:
-      - paciente
+      - domain.paciente
+    put:
+      consumes:
+      - application/json
+      description: Update paciente by ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Update paciente
+      tags:
+      - domain.paciente
   /ping:
     get:
       consumes:
@@ -309,7 +337,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: Get all turnos
+      description: Get all the turnos
       produces:
       - application/json
       responses:
@@ -321,9 +349,9 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: turno example
+      summary: Get all turnos
       tags:
-      - turno
+      - domain.turno
     post:
       consumes:
       - application/json
@@ -343,14 +371,14 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: turno example
+      summary: Create turno
       tags:
-      - turno
+      - domain.turno
   /turnos/:id:
     delete:
       consumes:
       - application/json
-      description: Delete turno by id
+      description: Delete turno by ID
       parameters:
       - description: id del turno
         in: path
@@ -372,13 +400,13 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: turno example
+      summary: Delete turno
       tags:
-      - turno
+      - domain.turno
     get:
       consumes:
       - application/json
-      description: Get turno by id
+      description: Get a turno by ID
       parameters:
       - description: id del turno
         in: path
@@ -400,13 +428,19 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: turno example
+      summary: Get turno by ID
       tags:
-      - turno
-    put:
+      - domain.turno
+    patch:
       consumes:
       - application/json
-      description: Update turno by id
+      description: Modify the values of the turno fields
+      parameters:
+      - description: id del turno
+        in: path
+        name: id
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -422,9 +456,31 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/web.errorResponse'
-      summary: turno example
+      summary: Patch turno
       tags:
-      - turno
+      - domain.turno
+    put:
+      consumes:
+      - application/json
+      description: Update turno by ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Update turno
+      tags:
+      - domain.turno
 securityDefinitions:
   BasicAuth:
     type: basic

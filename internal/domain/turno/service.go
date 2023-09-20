@@ -12,8 +12,10 @@ type service struct {
 
 type Service interface {
 	Create(ctx context.Context, requestTurno RequestTurno) (Turno, error)
+	CreateByDniAndMatricula(ctx context.Context, request RequestTurnoDniAndMatricula)(any, error)
 	GetAll(ctx context.Context) ([]Turno, error)
 	GetByID(ctx context.Context, id int) (Turno, error)
+	GetByDniPaciente(ctx context.Context, dni string) ([]RequestTurnoByDni, error)
 	Update(ctx context.Context, requestTurno RequestTurno, id int) (Turno, error)
 	Delete(ctx context.Context, id int) error
 	Patch(ctx context.Context, id int, campos map[string]interface{}) (*Turno, error)
@@ -38,6 +40,18 @@ func (s *service) Create(ctx context.Context, requestTurno RequestTurno) (Turno,
 	return response, nil
 }
 
+//Crea turno con dni paciente y matricula de odontologo
+func (s *service)CreateByDniAndMatricula(ctx context.Context, request RequestTurnoDniAndMatricula)(any, error){
+	_, err := s.repository.CreateByDniAndMatricula(ctx, request)
+
+	if err != nil {
+		log.Println("error en servicio. Metodo create dni y matricula")
+		return Turno{}, errors.New("error en servicio. Metodo create dni y matricula")
+	}
+
+	return "succes", nil
+}
+
 // GetAll returns all Turnos.
 func (s *service) GetAll(ctx context.Context) ([]Turno, error) {
 	turnos, err := s.repository.GetAll(ctx)
@@ -57,6 +71,18 @@ func (s *service) GetByID(ctx context.Context, id int) (Turno, error) {
 		return Turno{}, errors.New("error en servicio. Metodo GetByID")
 	}
 
+	return turno, nil
+}
+
+// GetByDniPaciente returns a Turno for the Paciente dni that we send as a parameter
+func (s *service) GetByDniPaciente(ctx context.Context, dni string) ([]RequestTurnoByDni, error) {
+	turno, err := s.repository.GetByDniPaciente(ctx, dni)
+	if err != nil {
+		if err != nil {
+			log.Println("log de error en service de turno GetByDniPaciente", err.Error())
+			return []RequestTurnoByDni{}, errors.New("error en servicio. Metodo GetByDniPaciente")
+		}
+	}
 	return turno, nil
 }
 

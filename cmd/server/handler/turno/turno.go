@@ -47,8 +47,43 @@ func (c *Controlador) Create() gin.HandlerFunc {
 			return
 		}
 
-		web.Success(ctx, http.StatusOK, gin.H{
+		web.Success(ctx, http.StatusCreated, gin.H{
 			"data": turno,
+		})
+
+	}
+}
+
+// turno godoc
+// @Summary turno example
+// @Description Create a new turno by Dni and Matricula
+// @Tags turno
+// @Accept json
+// @Produce json
+// @Success 200 {object} web.response
+// @Failure 400 {object} web.errorResponse
+// @Failure 500 {object} web.errorResponse
+// @Router /turnosByDni [post]
+func (c *Controlador)CreateTurno() gin.HandlerFunc{
+	return func(ctx *gin.Context) {
+
+		var request turno.RequestTurnoDniAndMatricula
+
+		err := ctx.Bind(&request)
+
+		if err != nil {
+			web.Error(ctx, http.StatusBadRequest, "%s", "bad request")
+			return
+		}
+
+		turno, err := c.service.CreateByDniAndMatricula(ctx, request)
+		if err != nil {
+			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
+			return
+		}
+
+		web.Success(ctx, http.StatusCreated, gin.H{
+			"message": turno,
 		})
 
 	}
@@ -98,6 +133,33 @@ func (c *Controlador) GetByID() gin.HandlerFunc {
 		}
 
 		turno, err := c.service.GetByID(ctx, id)
+		if err != nil {
+			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
+			return
+		}
+
+		web.Success(ctx, http.StatusOK, gin.H{
+			"data": turno,
+		})
+	}
+}
+
+// Turno godoc
+// @Summary turno example
+// @Description Get turno by pacienteDni
+// @Tags turno
+// @Param dni path string "dni del paciente"
+// @Accept json
+// @Produce json
+// @Success 200 {object} web.response
+// @Failure 400 {object} web.errorResponse
+// @Failure 500 {object} web.errorResponse
+// @Router /turnosPaciente/dni [get]
+func (c *Controlador) GetByDniPaciente() gin.HandlerFunc{
+	return func(ctx *gin.Context){
+		dni := ctx.Query("dni")
+		turno, err := c.service.GetByDniPaciente(ctx, dni)
+
 		if err != nil {
 			web.Error(ctx, http.StatusInternalServerError, "%s", "internal server error")
 			return

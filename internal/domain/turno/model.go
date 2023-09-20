@@ -17,3 +17,21 @@ type RequestTurno struct {
 	Descripcion  string `json:"descripcion"`
 	FechaHora    string `json:"fecha_hora"`
 }
+
+//RequestTurnoByDni describes the data needed to read a turn, pacient and dentist information of a turn
+type RequestTurnoByDni struct {
+	Descripcion         string `json:"descripcion"`
+	FechaHora           string `json:"fecha_hora"`
+	Dni                 string `json:"dni"`
+	NamePaciente        string `json:"name_paciente"`
+	FirstNamePaciente   string `json:"firstname_paciente"`
+	NameOdontologo      string `json:"name_odontologo"`
+	FirstNameOdontologo string `json:"firstname_odontologo"`
+}
+
+type RequestTurnoDniAndMatricula struct {
+	Dni         string `json:"dni"`
+	Matricula   string `json:"matricula"`
+	Descripcion string `json:"descripcion"`
+	FechaHora   string `json:"fecha_hora"`
+}

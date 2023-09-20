@@ -3,11 +3,11 @@
 # Para levantar el proyecto
 Warning: la base de datos se levanta en el puerto 3306, verificar si esta libre! En caso de estar ocupado cambiar puerto en el archivo docker-compose y main antes de levantar el proyecto.
 Si no podria tener localmente una base de datos creada con el nombre: my_db y ejecutar el proyecto sin necesidad de levantar el contenedor.
-Adicionalmente el proyecto se encarga de crear la estructura de cargas y setear los registros iniciales.
+Adicionalmente el proyecto se encarga de crear la estructura de tablas y setear los registros iniciales.
 
 - docker-compose up (si es la primera vez, sino ejecutar --> docker start mysql)
 
-- go run cmd/main.go
+- go run cmd/server/main.go
 
 ###  Sistema de reserva de turnos
 Se desea implementar una API que permita administrar la reserva de turnos para una clínica
